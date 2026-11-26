@@ -9,6 +9,8 @@
 - Versión y nombre centralizados en `APP_NAME` / `APP_VERSION`.
 
 ### Añadido
+- Ícono de la app incrustado en el `.exe` y en la ventana.
+- Información de versión en las propiedades del `.exe`.
 - Opción `-v` / `--version`.
 - README, licencia, script de compilación y logo en `assets/`.
 

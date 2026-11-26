@@ -67,23 +67,30 @@ DiskSweep.exe -y         :: sin preguntar
 
 No necesita librerías externas, solo `<windows.h>` y la biblioteca estándar.
 
+Lo más fácil: ejecuta **`build.bat`**. Incrusta `assets/logo.ico` en el `.exe` y compila.
+
+A mano:
+
 ```bat
 :: MinGW / g++
-g++ DiskSweep.cpp -o DiskSweep.exe -static
+windres DiskSweep.rc -O coff -o DiskSweep_res.o
+g++ DiskSweep.cpp DiskSweep_res.o -o DiskSweep.exe -static
 
 :: MSVC
-cl /EHsc /O2 DiskSweep.cpp
+rc DiskSweep.rc
+cl /EHsc /O2 DiskSweep.cpp DiskSweep.res
 ```
 
-O simplemente ejecuta `build.bat`.
+El `.exe` resultante lleva el ícono de DiskSweep (en el Explorador, la barra de tareas y la ventana).
 
 ## 📁 Estructura
 
 ```
 DiskSweep/
 ├── DiskSweep.cpp      # Código fuente
+├── DiskSweep.rc       # Ícono e info de versión del .exe
 ├── build.bat          # Compilación rápida
-├── assets/            # Logo (SVG)
+├── assets/            # Logo (SVG) e ícono (logo.ico)
 ├── CHANGELOG.md
 └── LICENSE
 ```

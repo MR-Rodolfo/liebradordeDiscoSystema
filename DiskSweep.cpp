@@ -13,9 +13,12 @@
 //  SIN librerias externas: solo <windows.h> y la libreria estandar.
 //  Funciona en C++11 o superior (no necesita flags especiales).
 //
-//  Compilar:
-//     MinGW / g++ :  g++ DiskSweep.cpp -o DiskSweep.exe -static
-//     MSVC        :  cl /EHsc /O2 DiskSweep.cpp
+//  Compilar (el icono va incrustado desde DiskSweep.rc):
+//     Lo facil    :  build.bat
+//     MinGW / g++ :  windres DiskSweep.rc -O coff -o DiskSweep_res.o
+//                    g++ DiskSweep.cpp DiskSweep_res.o -o DiskSweep.exe -static
+//     MSVC        :  rc DiskSweep.rc
+//                    cl /EHsc /O2 DiskSweep.cpp DiskSweep.res
 //
 //  Opciones:
 //     -n, --dry-run   Simula (no borra nada, solo calcula)
@@ -72,6 +75,20 @@ static void enable_console() {
         cCyan = "\x1b[96m";   cBlue = "\x1b[94m";   cMagenta = "\x1b[95m";
         cGray = "\x1b[90m";
     }
+}
+
+// Icono y titulo de la ventana (el icono 1 va incrustado en el .exe, ver DiskSweep.rc)
+static void set_window_icon() {
+    SetConsoleTitleA(APP_NAME " v" APP_VERSION);
+    HWND w = GetConsoleWindow();
+    if (!w) return;
+    HINSTANCE inst = GetModuleHandleW(NULL);
+    HANDLE ico_big = LoadImageW(inst, MAKEINTRESOURCEW(1), IMAGE_ICON,
+                                GetSystemMetrics(SM_CXICON), GetSystemMetrics(SM_CYICON), 0);
+    HANDLE ico_min = LoadImageW(inst, MAKEINTRESOURCEW(1), IMAGE_ICON,
+                                GetSystemMetrics(SM_CXSMICON), GetSystemMetrics(SM_CYSMICON), 0);
+    if (ico_big) SendMessageW(w, WM_SETICON, ICON_BIG,   (LPARAM)ico_big);
+    if (ico_min) SendMessageW(w, WM_SETICON, ICON_SMALL, (LPARAM)ico_min);
 }
 
 static void hide_cursor(bool hide) {
@@ -574,6 +591,7 @@ static void row(const std::string& k, const std::string& v, const char* col) {
 
 int main(int argc, char** argv) {
     enable_console();
+    set_window_icon();
 
     Options opt;
     for (int i = 1; i < argc; ++i) {
