@@ -7,8 +7,13 @@ REM |____/|_|___/_|\_\ |____/ \_/\_/ \___|\___| .__/
 REM                                            |_|
 REM  DiskSweep v2.0.0 - compilacion rapida (con icono)
 
+REM Si no hay assets\logo.ico, se genera desde assets\logo.ico.b64 (texto)
 if not exist assets\logo.ico (
-    echo Aviso: falta assets\logo.ico, se compilara sin icono.
+    if exist assets\logo.ico.b64 (
+        certutil -f -decode assets\logo.ico.b64 assets\logo.ico >nul
+    ) else (
+        echo Aviso: falta assets\logo.ico, se compilara sin icono.
+    )
 )
 
 where g++ >nul 2>nul
