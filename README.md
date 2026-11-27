@@ -4,7 +4,7 @@
 
 # DiskSweep
 
-Relase
+
 <a href="https://github.com/MR-Rodolfo/liebradordeDiscoSystema/releases/tag/DiskSweep2.0.0full">Releases</a>
 
 
