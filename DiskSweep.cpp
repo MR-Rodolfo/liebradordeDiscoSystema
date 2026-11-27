@@ -87,6 +87,12 @@ static void set_window_icon() {
                                 GetSystemMetrics(SM_CXICON), GetSystemMetrics(SM_CYICON), 0);
     HANDLE ico_min = LoadImageW(inst, MAKEINTRESOURCEW(1), IMAGE_ICON,
                                 GetSystemMetrics(SM_CXSMICON), GetSystemMetrics(SM_CYSMICON), 0);
+    if (!ico_big)
+        ico_big = LoadImageW(NULL, L"logo.ico", IMAGE_ICON,
+                             GetSystemMetrics(SM_CXICON), GetSystemMetrics(SM_CYICON), LR_LOADFROMFILE);
+    if (!ico_min)
+        ico_min = LoadImageW(NULL, L"logo.ico", IMAGE_ICON,
+                             GetSystemMetrics(SM_CXSMICON), GetSystemMetrics(SM_CYSMICON), LR_LOADFROMFILE);
     if (ico_big) SendMessageW(w, WM_SETICON, ICON_BIG,   (LPARAM)ico_big);
     if (ico_min) SendMessageW(w, WM_SETICON, ICON_SMALL, (LPARAM)ico_min);
 }
