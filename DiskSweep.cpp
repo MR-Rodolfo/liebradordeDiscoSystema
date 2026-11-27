@@ -723,4 +723,4 @@ int main(int argc, char** argv) {
     hide_cursor(false);
     if (opt.pause) wait_enter();
     return 0;
-}
+} 
