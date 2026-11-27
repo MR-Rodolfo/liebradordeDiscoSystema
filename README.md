@@ -1,12 +1,13 @@
 <div align="center">
 
 <img src="assets/logo.svg" alt="DiskSweep" width="160"/>
+# DiskSweep
 
-# Relase 👇
 
+# Relase 
 <a href="https://github.com/MR-Rodolfo/liebradordeDiscoSystema/releases/tag/DiskSweep2.0.0full">Releases</a>
 
-# DiskSweep
+
 
 **Liberador de espacio en disco para Windows**
 Rápido, ligero y sin dependencias. Un solo `.exe`.
